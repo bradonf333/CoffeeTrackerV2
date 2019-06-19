@@ -16,11 +16,15 @@ export class CoffeeService {
     this.coffeeList.push(coffee);
   }
 
-  getCoffees() {
+  getAllCoffees() {
     return this.coffeeList;
   }
 
-  deleteCoffee(index) {
+  getCoffee(id: string) {
+    return this.coffeeList.find(x => x.id === id);
+  }
+
+  deleteCoffee(index: number) {
     this.coffeeList.splice(index, 1);
   }
 }
