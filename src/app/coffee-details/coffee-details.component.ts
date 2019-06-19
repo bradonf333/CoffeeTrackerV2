@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoffeeDetailsComponent implements OnInit {
   elements: any = [
-    { id: 1, first: 'Mark', last: 'Otto', handle: '@mdo' },
-    { id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat' },
-    { id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter' }
+    { id: 1, Name: 'El Vapor', Roaster: 'Jack Mormon', Rating: '7' },
+    { id: 2, Name: 'La Bicicletta', Roaster: 'Doma Coffee Roasters', Rating: '7.5' },
+    { id: 3, Name: 'Little Italy', Roaster: 'Bird Rock', Rating: '9' }
   ];
 
-  headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['ID', 'Name', 'Roaster', 'Rating'];
 
   constructor() {}
 
