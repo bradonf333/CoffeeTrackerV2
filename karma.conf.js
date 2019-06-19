@@ -15,6 +15,9 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    browserConsoleLogOptions: {
+      level: 'log'
+    },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/coffeetracker-v2'),
       reports: ['html', 'lcovonly', 'text-summary'],

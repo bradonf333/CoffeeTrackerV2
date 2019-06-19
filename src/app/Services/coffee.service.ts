@@ -5,14 +5,22 @@ import { Coffee } from '../Models/Coffee';
   providedIn: 'root'
 })
 export class CoffeeService {
-  public coffees: Coffee[] = [
+  public coffeeList: Coffee[] = [
     { id: '1', name: 'El Vapor', roaster: 'Jack Mormon', rating: 7 },
     { id: '2', name: 'La Bicicletta', roaster: 'Doma Coffee Roasters', rating: 7.5 },
     { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
   ];
   constructor() {}
 
-  addNewCoffee(name: string, roaster: string, rating: number) {
-    this.coffees.push(new Coffee(name, roaster, rating));
+  addCoffee(coffee: Coffee) {
+    this.coffeeList.push(coffee);
+  }
+
+  getCoffees() {
+    return this.coffeeList;
+  }
+
+  deleteCoffee(index) {
+    this.coffeeList.splice(index, 1);
   }
 }
