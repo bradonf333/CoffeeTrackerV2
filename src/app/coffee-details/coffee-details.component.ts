@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Coffee } from '../Models/Coffee';
+import { CoffeeService } from '../Services/coffee.service';
 
 @Component({
   selector: 'app-coffee-details',
@@ -6,15 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coffee-details.component.scss']
 })
 export class CoffeeDetailsComponent implements OnInit {
-  elements: any = [
-    { id: 1, Name: 'El Vapor', Roaster: 'Jack Mormon', Rating: '7' },
-    { id: 2, Name: 'La Bicicletta', Roaster: 'Doma Coffee Roasters', Rating: '7.5' },
-    { id: 3, Name: 'Little Italy', Roaster: 'Bird Rock', Rating: '9' }
-  ];
+  coffees: Observable<Coffee[]>;
+  headElements = ['Name', 'Roaster', 'Rating'];
 
-  headElements = ['ID', 'Name', 'Roaster', 'Rating'];
+  constructor(private coffeeService: CoffeeService) {}
 
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.coffees = this.coffeeService.getAllCoffeesFS();
+  }
 }

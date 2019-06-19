@@ -1,16 +1,15 @@
 <div class="container">
-  <table mdbTable>
+  <table mdbTable hover="true" striped="true">
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col">{{head}} </th>
       </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let el of elements">
-        <th scope="row">{{el.id}}</th>
-        <td>{{el.Name}}</td>
-        <td>{{el.Roaster}}</td>
-        <td>{{el.Rating}}</td>
+      <tr mdbTableCol *ngFor="let coffee of coffees | async">
+        <td>{{coffee.name}}</td>
+        <td>{{coffee.roaster}}</td>
+        <td>{{coffee.rating}}</td>
       </tr>
     </tbody>
   </table>

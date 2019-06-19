@@ -1,5 +1,6 @@
 import { Coffee } from '../Models/Coffee';
 import { CoffeeService } from './coffee.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 describe('CoffeeService', () => {
   let service: CoffeeService;
