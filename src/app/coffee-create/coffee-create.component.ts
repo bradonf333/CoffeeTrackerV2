@@ -38,15 +38,8 @@ export class CoffeeCreateComponent implements OnInit {
     return this.coffeeForm.get('rating');
   }
 
-  /** Add or Edit Coffee */
-  onSubmit() {
-    // this.coffeeForm.controls.coffeeName.setValue(name);
-    console.log(this.coffeeForm.controls.coffeeName.value);
-  }
-
   /** Get FormControl Error Messages */
   getErrorMessage(validator: FormControl) {
-    console.log(validator);
     let errorMessage = '';
     if (validator.hasError('required')) {
       errorMessage += 'You must enter a value.';

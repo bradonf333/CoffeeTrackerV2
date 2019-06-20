@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { CoffeeCreateComponent } from './coffee-create.component';
 
 describe('CoffeeCreateComponent', () => {
@@ -8,9 +8,9 @@ describe('CoffeeCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoffeeCreateComponent ]
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule],
+      declarations: [CoffeeCreateComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
