@@ -6,7 +6,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let coffee of coffees | async">
+      <!-- <tr mdbTableCol *ngFor="let coffee of coffees | async"> -->
+      <tr mdbTableCol *ngFor="let coffee of coffees">
         <td>{{coffee.name}}</td>
         <td>{{coffee.roaster}}</td>
         <td>{{coffee.rating}}</td>

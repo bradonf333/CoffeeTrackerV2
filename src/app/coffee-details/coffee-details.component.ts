@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Coffee } from '../Models/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
 
@@ -9,12 +8,13 @@ import { CoffeeService } from '../Services/coffee.service';
   styleUrls: ['./coffee-details.component.scss']
 })
 export class CoffeeDetailsComponent implements OnInit {
-  coffees: Observable<Coffee[]>;
+  // coffees: Observable<Coffee[]>;
+  coffees: Coffee[];
   headElements = ['Name', 'Roaster', 'Rating'];
 
   constructor(private coffeeService: CoffeeService) {}
 
   ngOnInit() {
-    this.coffees = this.coffeeService.getAllCoffeesFS();
+    this.coffees = this.coffeeService.getAllCoffees();
   }
 }

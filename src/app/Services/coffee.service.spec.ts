@@ -1,9 +1,12 @@
+import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Coffee } from '../Models/Coffee';
 import { CoffeeService } from './coffee.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 describe('CoffeeService', () => {
   let service: CoffeeService;
+  // let angularFirestore: AngularFirestore;
+
   const expectedCoffeeId = '123';
   const expectedCoffeeName = 'TestCoffee';
   const expectedCoffeeRoaster = 'TestRoaster';
@@ -15,8 +18,31 @@ describe('CoffeeService', () => {
     expectedCoffeeRating
   );
 
+  const coffeeList: any = [
+    { id: '1', name: 'El Vapor', roaster: 'Jack Mormon', rating: 7 },
+    { id: '2', name: 'La Bicicletta', roaster: 'Doma Coffee Roasters', rating: 7.5 },
+    { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
+  ];
+
+  const data = of(coffeeList);
+
+  const collectionStub = {
+    snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data)
+  };
+
+  const angularFirestoreStub = {
+    collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+  };
+
   beforeEach(() => {
-    service = new CoffeeService();
+    TestBed.configureTestingModule({
+      // providers: [
+      //   CoffeeService,
+      //   { provide: AngularFirestore, useValue: angularFirestoreStub }
+      // ]
+    });
+    service = TestBed.get(CoffeeService);
+    // angularFirestore = TestBed.get(AngularFirestore);
   });
 
   it('addCoffee should add test coffee to CoffeeList', () => {
@@ -32,7 +58,7 @@ describe('CoffeeService', () => {
 
   it('getAllCoffees should return CoffeeList', () => {
     service.addCoffee(testCoffee);
-    const coffeeList = service.getAllCoffees();
+    const coffees = service.getAllCoffees();
     console.log(
       `Current Length of the Coffee List after getting it from the service: ${
         coffeeList.length
