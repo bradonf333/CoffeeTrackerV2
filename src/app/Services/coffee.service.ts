@@ -26,10 +26,6 @@ export class CoffeeService {
     this.coffeeList.push(coffee);
   }
 
-  getAllCoffees() {
-    return this.coffeeList;
-  }
-
   /**
    * Returns an Observable of Coffee[]. In order to get the Array of Coffees
    * you need to subscribe to the Observable.
