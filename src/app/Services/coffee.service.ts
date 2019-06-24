@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { config } from '../app.config';
 import { Coffee } from '../Models/Coffee';
 
 @Injectable({
@@ -11,13 +14,13 @@ export class CoffeeService {
     { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
   ];
 
-  // public coffees: AngularFirestoreCollection<Coffee>;
+  public coffees: AngularFirestoreCollection<Coffee>;
 
-  // constructor(private db: AngularFirestore) {
-  //   this.coffees = db.collection<Coffee>(config.collection_endpoint);
-  // }
+  constructor(private afs: AngularFirestore) {
+    // this.coffees = afs.collection<Coffee>(config.collection_endpoint);
+  }
 
-  constructor() {}
+  // constructor() {}
 
   addCoffee(coffee: Coffee) {
     this.coffeeList.push(coffee);
@@ -27,29 +30,35 @@ export class CoffeeService {
     return this.coffeeList;
   }
 
-  // getAllCoffeesFS() {
-  //   const coffees = this.db
-  //     .collection<Coffee>(config.collection_endpoint)
-  //     .snapshotChanges()
-  //     .pipe(
-  //       map(coffeeDocs =>
-  //         coffeeDocs.map(a => {
-  //           const data = a.payload.doc.data() as Coffee;
-  //           const id = a.payload.doc.id;
-  //           console.log(a.payload);
-  //           console.log({ id, ...data });
-  //           return { id, ...data };
-  //         })
-  //       )
-  //     );
+  /**
+   * Returns an Observable of Coffee[]. In order to get the Array of Coffees
+   * you need to subscribe to the Observable.
+   */
+  getAllCoffeesFS() {
+    const coffees = this.afs
+      .collection<Coffee>(config.collection_endpoint)
+      .snapshotChanges()
+      .pipe(
+        map(coffeeDocs =>
+          coffeeDocs.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            // console.log(a.payload);
+            // console.log({ id, ...data });
+            return { id, ...data } as Coffee;
+            // By returning this piped/mapped object as a coffee you can interact with it as a Coffee object.
+          })
+        )
+      );
+    return coffees;
+  }
 
-  //   console.log(coffees);
-
-  //   return coffees;
-  // }
-
+  /** Return a Coffee from the DB */
   getCoffee(id: string) {
-    return this.coffeeList.find(x => x.id === id);
+    return this.afs
+      .collection(config.collection_endpoint)
+      .doc<Coffee>(id)
+      .valueChanges();
   }
 
   deleteCoffee(index: number) {

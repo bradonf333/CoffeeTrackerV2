@@ -15,6 +15,12 @@ export class CoffeeDetailsComponent implements OnInit {
   constructor(private coffeeService: CoffeeService) {}
 
   ngOnInit() {
-    this.coffees = this.coffeeService.getAllCoffees();
+    // this.coffees = this.coffeeService.getAllCoffees();
+    this.coffeeService.getAllCoffeesFS().subscribe(coffeeData => {
+      // coffeeData is now an array of Coffees. You can access the Properties of
+      // the coffee object just like you would access an object within an array.
+      // i.e. coffeeData[0].id, coffeeData[0].name, etc..
+      this.coffees = coffeeData;
+    });
   }
 }
