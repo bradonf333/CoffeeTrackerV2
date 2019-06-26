@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'angular-bootstrap-md';
-import { Coffee } from '../Models/Coffee';
+import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { Coffee } from '../Models/Coffee';
+import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
 import { CoffeeDetailsComponent } from './coffee-details.component';
 
@@ -37,7 +37,7 @@ describe('CoffeeDetailsComponent', () => {
   });
 });
 
-class CoffeeServiceStub {
+export class CoffeeServiceStub {
   public coffeeList: Coffee[] = [
     { id: '1', name: 'El Vapor', roaster: 'Jack Mormon', rating: 7 },
     { id: '2', name: 'La Bicicletta', roaster: 'Doma Coffee Roasters', rating: 7.5 },

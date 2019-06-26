@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { config } from '../app.config';
-import { Coffee } from '../Models/Coffee';
+import { Coffee } from '../Models/Entities/Coffee';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { Coffee } from '../Models/Coffee';
+import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from './coffee.service';
 
 const coffeeList: Coffee[] = [
