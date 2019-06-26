@@ -35,9 +35,45 @@
       </div>
     </div>
 
-    <!-- Sign in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+    <!-- Submit button -->
+    <button mdbBtn color="default" rounded="true" type="submit" [disabled]="coffeeForm.invalid"
+      mdbWavesEffect>Submit</button>
 
   </form>
   <!-- Default form login -->
+</div>
+
+
+<div mdbModal #success="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Coffee Added Successfully</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="success.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>View your new Coffee?</p>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect>Yes Please!</a>
+        <!--TODO: When Yes button is pressed, go to the coffee Detail page.-->
+        <a type="button" mdbBtn color="success" outline="true" class="waves-effect" mdbWavesEffect
+          routerLink="/coffee-details">No, thanks</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
 </div>

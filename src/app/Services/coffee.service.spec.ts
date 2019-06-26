@@ -17,8 +17,18 @@ const docStub = {
   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(docData)
 };
 
+const pipeStub = {
+
+};
+
+const snapshotChangesStub = {
+  pipe: jasmine.createSpy('pipe').and.returnValue(data)
+};
+
 const collectionStub = {
-  snapshotChanges: jasmine.createSpy('snapShotChanges').and.returnValue(data),
+  snapshotChanges: jasmine
+    .createSpy('snapShotChanges')
+    .and.returnValue(snapshotChangesStub),
   doc: jasmine.createSpy('doc').and.returnValue(docStub)
 };
 
@@ -47,14 +57,24 @@ describe('CoffeeService: My: TestBed', () => {
   });
 
   it('should initialize Coffees with getCoffeesFS', () => {
+    let coffees: Coffee[];
     service.getAllCoffeesFS().subscribe(coffeeData => {
-      const coffees = coffeeData;
+      coffees = coffeeData;
+      console.log('Coffees: ', coffees);
     });
+
+    expect(true).toBeTruthy();
   });
 
   it('should return a single Coffee with getCoffee', () => {
-    service.getCoffee('1').subscribe(coffeeData => {
-      const coffee = coffeeData;
+    const testCoffee = coffeeList[0];
+    let actualCoffee: Coffee;
+    service.getCoffee(testCoffee.id).subscribe(coffeeData => {
+      actualCoffee = coffeeData;
     });
+
+    console.log('Actual Coffee: ', actualCoffee);
+    console.log('Test Coffee: ', testCoffee);
+    expect(actualCoffee).toBe(testCoffee);
   });
 });

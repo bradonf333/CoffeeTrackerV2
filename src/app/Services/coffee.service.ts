@@ -17,13 +17,31 @@ export class CoffeeService {
   public coffees: AngularFirestoreCollection<Coffee>;
 
   constructor(private afs: AngularFirestore) {
-    // this.coffees = afs.collection<Coffee>(config.collection_endpoint);
+    this.coffees = afs.collection<Coffee>(config.collection_endpoint);
   }
 
   // constructor() {}
 
   addCoffee(coffee: Coffee) {
     this.coffeeList.push(coffee);
+  }
+
+  createCoffee(coffee: Coffee) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs
+        .collection<Coffee>(config.collection_endpoint)
+        .add(coffee)
+        .then(
+          docRef => {
+            console.log(`Document written with ID: ${docRef.id}`);
+            resolve(docRef);
+          },
+          err => {
+            console.error(`Error adding the document: ${err}`);
+            reject(err);
+          }
+        );
+    });
   }
 
   /**

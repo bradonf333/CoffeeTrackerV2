@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ModalDirective } from 'angular-bootstrap-md';
+import { Coffee } from '../Models/Coffee';
+import { CoffeeService } from '../Services/coffee.service';
 
 @Component({
   selector: 'app-coffee-create',
@@ -7,9 +11,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./coffee-create.component.scss']
 })
 export class CoffeeCreateComponent implements OnInit {
+  @ViewChild('success', { static: false }) success: ModalDirective;
   coffeeForm: FormGroup;
 
-  constructor() {}
+  constructor(private coffeeService: CoffeeService, private router: Router) {}
 
   ngOnInit() {
     this.coffeeForm = new FormGroup({
@@ -25,6 +30,27 @@ export class CoffeeCreateComponent implements OnInit {
         Validators.min(0),
         Validators.max(10)
       ])
+    });
+  }
+
+  showAndHideModal() {
+    this.success.show();
+
+    // setTimeout(() => {
+    //   this.success.hide();
+    // }, 3000);
+  }
+
+  onSubmit() {
+    const coffee: Coffee = {
+      name: this.name.value,
+      roaster: this.roaster.value,
+      rating: this.rating.value
+    };
+    this.coffeeService.createCoffee(coffee).then(res => {
+      console.log('Success after coffee creation.');
+      this.showAndHideModal();
+      // this.router.navigate(['/coffee-details']);
     });
   }
 
