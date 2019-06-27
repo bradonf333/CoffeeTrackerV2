@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
 
@@ -9,18 +10,12 @@ import { CoffeeService } from '../Services/coffee.service';
 })
 export class CoffeeDetailsComponent implements OnInit {
   // coffees: Observable<Coffee[]>;
-  coffees: Coffee[];
+  coffees$: Observable<Coffee[]>;
   headElements = ['Name', 'Roaster', 'Rating'];
 
   constructor(private coffeeService: CoffeeService) {}
 
   ngOnInit() {
-    // this.coffees = this.coffeeService.getAllCoffees();
-    this.coffeeService.getAllCoffeesFS().subscribe(coffeeData => {
-      // coffeeData is now an array of Coffees. You can access the Properties of
-      // the coffee object just like you would access an object within an array.
-      // i.e. coffeeData[0].id, coffeeData[0].name, etc..
-      this.coffees = coffeeData;
-    });
+    this.coffees$ = this.coffeeService.list();
   }
 }
