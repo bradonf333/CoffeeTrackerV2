@@ -57,10 +57,25 @@ export abstract class BaseService<T extends IBaseEntity> implements IBaseService
   }
 
   update(item: T): Promise<T> {
-    throw new Error('Method not implemented.');
+    console.log(`[BaseService] updating item ${item.id}`);
+
+    const promise = new Promise<T>((resolve, reject) => {
+      const docRef = this.collection
+        .doc<T>(item.id)
+        .set(item)
+        .then(() => {
+          resolve({
+            ...(item as any)
+          });
+        });
+    });
+    return promise;
   }
 
   delete(id: string): void {
-    throw new Error('Method not implemented.');
+    console.log(`[BaseService] deleting item ${id}`);
+
+    const docRef = this.collection.doc<T>(id);
+    docRef.delete();
   }
 }

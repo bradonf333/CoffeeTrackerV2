@@ -3,22 +3,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
-import { CoffeeDetailsComponent } from './coffee-details.component';
+import { CoffeeListComponent } from './coffee-list.component';
 
-describe('CoffeeDetailsComponent', () => {
-  let component: CoffeeDetailsComponent;
-  let fixture: ComponentFixture<CoffeeDetailsComponent>;
+describe('CoffeeListComponent', () => {
+  let component: CoffeeListComponent;
+  let fixture: ComponentFixture<CoffeeListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [CoffeeDetailsComponent],
+      declarations: [CoffeeListComponent],
       providers: [{ provide: CoffeeService, useClass: CoffeeServiceStub }]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoffeeDetailsComponent);
+    fixture = TestBed.createComponent(CoffeeListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -28,12 +28,10 @@ describe('CoffeeDetailsComponent', () => {
   });
 
   it('should return Coffees when getCoffeesFS is called', () => {
-    let coffees: Coffee[] = [];
+    const coffees$: Coffee[] = [];
     const service = fixture.debugElement.injector.get(CoffeeService);
-    service.getAllCoffeesFS().subscribe(data => {
-      coffees = data;
-    });
-    expect(coffees.length).toBe(3);
+    this.coffees$ = this.coffeeService.list();
+    expect(coffees$.length).toBe(3);
   });
 });
 

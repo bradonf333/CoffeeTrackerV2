@@ -11,14 +11,14 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoffeeCreateComponent } from './coffee-create/coffee-create.component';
-import { CoffeeDetailsComponent } from './coffee-details/coffee-details.component';
+import { CoffeeListComponent } from './coffee-list/coffee-list.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoffeeDetailsComponent,
+    CoffeeListComponent,
     NavbarComponent,
     HomeComponent,
     CoffeeCreateComponent

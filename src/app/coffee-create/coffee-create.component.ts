@@ -47,7 +47,7 @@ export class CoffeeCreateComponent implements OnInit {
       roaster: this.roaster.value,
       rating: this.rating.value
     };
-    this.coffeeService.createCoffee(coffee).then(res => {
+    this.coffeeService.add(coffee).then(res => {
       console.log('Success after coffee creation.');
       this.showAndHideModal();
       // this.router.navigate(['/coffee-details']);

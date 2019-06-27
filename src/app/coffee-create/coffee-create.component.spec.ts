@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { CoffeeServiceStub } from '../coffee-details/coffee-details.component.spec';
+import { CoffeeServiceStub } from '../coffee-list/coffee-list.component.spec';
 import { CoffeeService } from '../Services/coffee.service';
 import { CoffeeCreateComponent } from './coffee-create.component';
 

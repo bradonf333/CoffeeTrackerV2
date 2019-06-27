@@ -4,11 +4,11 @@ import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
 
 @Component({
-  selector: 'app-coffee-details',
-  templateUrl: './coffee-details.component.html',
-  styleUrls: ['./coffee-details.component.scss']
+  selector: 'app-coffee-list',
+  templateUrl: './coffee-list.component.html',
+  styleUrls: ['./coffee-list.component.scss']
 })
-export class CoffeeDetailsComponent implements OnInit {
+export class CoffeeListComponent implements OnInit {
   // coffees: Observable<Coffee[]>;
   coffees$: Observable<Coffee[]>;
   headElements = ['Name', 'Roaster', 'Rating'];
