@@ -50,7 +50,6 @@ export class CoffeeCreateComponent implements OnInit {
     this.coffeeService.add(coffee).then(res => {
       console.log('Success after coffee creation.');
       this.showAndHideModal();
-      // this.router.navigate(['/coffee-details']);
     });
   }
 
