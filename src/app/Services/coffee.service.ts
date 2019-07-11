@@ -16,7 +16,7 @@ export class CoffeeService extends BaseService<Coffee> {
 }
 
 export class CoffeeServiceMock extends BaseService<Coffee> {
-  // constructor(afs: AngularFirestore) {
+  // constructor(afs: AngularFirestoreStub) {
   //   const path = config.collection_endpoint;
   //   super(path, afs);
   // }

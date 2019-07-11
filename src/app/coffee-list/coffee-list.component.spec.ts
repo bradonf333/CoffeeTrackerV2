@@ -1,43 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, of } from 'rxjs';
 import { Coffee } from '../Models/Entities/Coffee';
 import { CoffeeService } from '../Services/coffee.service';
+import { fakeCoffeeList, FirestoreStub } from '../Services/Testing/test.assets';
 import { CoffeeListComponent } from './coffee-list.component';
 
-const coffeeList: Coffee[] = [
-  { id: '1', name: 'El Vapor', roaster: 'Jack Mormon', rating: 7 },
-  { id: '2', name: 'La Bicicletta', roaster: 'Doma Coffee Roasters', rating: 7.5 },
-  { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
-];
+// const pipeStub = {};
 
-const data: Observable<Coffee[]> = of(coffeeList);
-const docData: Observable<Coffee> = of(coffeeList[0]);
+// const snapshotChangesStub = {
+//   pipe: jasmine.createSpy('pipe').and.returnValue(data)
+// };
 
-const pipeStub = {};
+// const docStub = {
+//   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(docData),
+//   snapshotChanges: jasmine
+//     .createSpy('snapShotChanges')
+//     .and.returnValue(snapshotChangesStub)
+// };
 
-const snapshotChangesStub = {
-  pipe: jasmine.createSpy('pipe').and.returnValue(data)
-};
+// const collectionStub = {
+//   snapshotChanges: jasmine
+//     .createSpy('snapShotChanges')
+//     .and.returnValue(snapshotChangesStub),
+//   doc: jasmine.createSpy('doc').and.returnValue(docStub)
+// };
 
-const docStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(docData),
-  snapshotChanges: jasmine
-    .createSpy('snapShotChanges')
-    .and.returnValue(snapshotChangesStub)
-};
-
-const collectionStub = {
-  snapshotChanges: jasmine
-    .createSpy('snapShotChanges')
-    .and.returnValue(snapshotChangesStub),
-  doc: jasmine.createSpy('doc').and.returnValue(docStub)
-};
-
-const angularFirestoreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-};
+// const angularFirestoreStub = {
+//   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+// };
 
 describe('CoffeeListComponent', () => {
   let component: CoffeeListComponent;
@@ -47,15 +38,11 @@ describe('CoffeeListComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [CoffeeListComponent],
-      providers: [
-        CoffeeService,
-        { provide: AngularFirestore, useValue: angularFirestoreStub }
-      ]
+      providers: [CoffeeService, { provide: AngularFirestore, useValue: FirestoreStub }]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    const service = TestBed.get(CoffeeService);
     fixture = TestBed.createComponent(CoffeeListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -65,16 +52,44 @@ describe('CoffeeListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should return Coffees when getCoffeesFS is called', () => {
-  //   const coffees$: Coffee[] = [];
-  //   const service = fixture.debugElement.injector.get(CoffeeService);
-  //   this.coffees$ = this.coffeeService.get();
-  //   expect(coffees$.length).toBe(3);
-  // });
+  it('should return Coffees when list is called', () => {
+    let coffees: Coffee[] = [];
+    const service: CoffeeService = TestBed.get(CoffeeService);
+    const coffee = service.list();
+    coffee.subscribe((coffeesArray: Coffee[]) => {
+      coffees = coffeesArray;
+    });
 
-  it('should return Coffees when get is called', () => {
-    const service = TestBed.get(CoffeeService);
-    const coffee$ = service.get();
-    console.log('Hello', coffee$);
+    expect(coffees.length).toBe(fakeCoffeeList.length);
+  });
+
+  it('should return expected Coffe when get is called with id', () => {
+    const expectedCoffee: Coffee = fakeCoffeeList[0];
+
+    let coffee: Coffee;
+    const service: CoffeeService = TestBed.get(CoffeeService);
+    const coffeeObs = service.get('1');
+    coffeeObs.subscribe((coffeeData: Coffee) => {
+      coffee = coffeeData;
+    });
+
+    expect(expectedCoffee).toEqual(coffee);
+  });
+
+  /**
+   * This test is more of a validation of the FireStoreStub.
+   * This ensures I am returning the data I expect from the Stub.
+   */
+  it('should not return expected coffee when get is called with wrong id', () => {
+    const expectedCoffee: Coffee = fakeCoffeeList[1];
+
+    let coffee: Coffee;
+    const service: CoffeeService = TestBed.get(CoffeeService);
+    const coffeeObs = service.get('1'); // Doesn't matter what id is here. Stub returns hardcoded value anyway.
+    coffeeObs.subscribe((coffeeData: Coffee) => {
+      coffee = coffeeData;
+    });
+
+    expect(expectedCoffee).not.toEqual(coffee);
   });
 });
