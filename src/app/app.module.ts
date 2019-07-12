@@ -14,6 +14,7 @@ import { CoffeeCreateComponent } from './coffee-create/coffee-create.component';
 import { CoffeeListComponent } from './coffee-list/coffee-list.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CoffeeDeleteComponent } from './coffee-delete/coffee-delete.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CoffeeListComponent,
     NavbarComponent,
     HomeComponent,
-    CoffeeCreateComponent
+    CoffeeCreateComponent,
+    CoffeeDeleteComponent
   ],
   imports: [
     BrowserModule,
