@@ -79,5 +79,10 @@ export abstract class BaseService<T extends IBaseEntity> implements IBaseService
 
     const docRef = this.collection.doc<T>(id).delete();
     // docRef.delete();
+
+    // TODO: Original Code below, had to change to the above for testing.
+    // TODO: Once I can confirm the new code above works, I will remove this.
+    // const docRef = this.collection.doc<T>(id);
+    // docRef.delete();
   }
 }
