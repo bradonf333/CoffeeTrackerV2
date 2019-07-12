@@ -16,7 +16,8 @@ export const FirestoreStub = {
       valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
       snapshotChanges: () => ({
         pipe: () => coffeeData
-      })
+      }),
+      delete: () => fakeCoffeeList.splice(fakeCoffeeList.length - 1, 1)
     }),
     snapshotChanges: () => ({
       pipe: () => coffeeObs
