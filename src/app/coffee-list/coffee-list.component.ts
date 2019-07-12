@@ -9,7 +9,6 @@ import { CoffeeService } from '../Services/coffee.service';
   styleUrls: ['./coffee-list.component.scss']
 })
 export class CoffeeListComponent implements OnInit {
-  // coffees: Observable<Coffee[]>;
   coffees$: Observable<Coffee[]>;
   headElements = ['Name', 'Roaster', 'Rating'];
 

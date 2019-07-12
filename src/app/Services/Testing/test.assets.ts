@@ -7,7 +7,6 @@ export const fakeCoffeeList: Coffee[] = [
   { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
 ];
 
-const data: Observable<Coffee[]> = of(fakeCoffeeList);
 const coffeeObs: Observable<Coffee[]> = of(fakeCoffeeList);
 const coffeeData: Observable<Coffee> = of(fakeCoffeeList[0]);
 
