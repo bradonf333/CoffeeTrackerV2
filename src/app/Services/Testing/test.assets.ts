@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Coffee } from 'src/app/Models/Entities/Coffee';
 
-export const fakeCoffeeList: Coffee[] = [
+export let fakeCoffeeList: Coffee[] = [
   { id: '1', name: 'El Vapor', roaster: 'Jack Mormon', rating: 7 },
   { id: '2', name: 'La Bicicletta', roaster: 'Doma Coffee Roasters', rating: 7.5 },
   { id: '3', name: 'Little Italy', roaster: 'Bird Rock', rating: 9 }
@@ -16,11 +16,13 @@ export const FirestoreStub = {
       valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
       snapshotChanges: () => ({
         pipe: () => coffeeData
-      }),
-      set: (d: any) => new Promise((resolve, reject) => resolve())
+      })
     }),
     snapshotChanges: () => ({
       pipe: () => coffeeObs
+    }),
+    add: (coffee: Coffee) => ({
+      then: () => fakeCoffeeList.push(coffee)
     })
   })
 };
